@@ -3,13 +3,13 @@ import { getAuth } from 'firebase/auth';
 import { getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC-HuV79oAn9QU9SSwJXY77OwTTzT4UFvU",
-  authDomain: "agentic-nex.firebaseapp.com",
-  projectId: "agentic-nex",
-  storageBucket: "agentic-nex.firebasestorage.app",
-  messagingSenderId: "964717999257",
-  appId: "1:964717999257:web:388dd0b754e071f55f7408",
-  measurementId: "G-MYGVXQ75NN"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase only if no apps exist
