@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'CyberFont';
+  src: url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+}
+
+:root {
+  --cyber-blue: #00f0ff;
+  --cyber-purple: #a855f7;
+  --cyber-dark: #0a0a0a;
+}
+
+/* Custom Cursor */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--cyber-blue);
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 50;
+  transition: all 0.2s ease;
+}
+
+.cursor-outline {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--cyber-blue);
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 50;
+  transition: all 0.2s ease;
+}
+
+/* Animations */
+@keyframes glow {
+  0% { box-shadow: 0 0 5px var(--cyber-blue), 0 0 10px var(--cyber-blue), 0 0 15px var(--cyber-blue); }
+  50% { box-shadow: 0 0 10px var(--cyber-blue), 0 0 20px var(--cyber-blue), 0 0 30px var(--cyber-blue); }
+  100% { box-shadow: 0 0 5px var(--cyber-blue), 0 0 10px var(--cyber-blue), 0 0 15px var(--cyber-blue); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Base Styles */
+.cyberpunk-bg {
+  background-color: black;
+  background-image: 
+    linear-gradient(0deg, rgba(0,240,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,240,255,0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
+}
+
+.cyber-text {
+  font-family: 'CyberFont', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px var(--cyber-blue);
+}
+
+/* Navigation */
+.side-nav {
+  @apply fixed left-0 top-1/2 -translate-y-1/2 p-4 z-40 bg-black bg-opacity-50 backdrop-blur-sm rounded-r-lg;
+}
+
+.side-nav-item {
+  @apply w-12 h-12 flex items-center justify-center text-cyber-blue hover:text-white transition-all duration-300;
+  animation: pulse 2s infinite;
+}
+
+.side-nav-item:hover {
+  animation: none;
+  transform: scale(1.2);
+}
+
+/* Sections */
+.section {
+  @apply min-h-screen flex items-center justify-center p-8 relative overflow-hidden;
+}
+
+.section::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-20;
+  pointer-events: none;
+}
+
+/* Cards */
+.feature-card {
+  @apply p-6 border border-cyber-blue rounded-lg bg-black/30 backdrop-blur-sm 
+  transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.feature-card::before {
+  content: '';
+  @apply absolute inset-0 rounded-lg;
+  background: linear-gradient(45deg, var(--cyber-blue), transparent, var(--cyber-blue));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-card:hover::before {
+  opacity: 0.2;
+  animation: glow 2s infinite;
+}
+
+.feature-icon {
+  @apply w-8 h-8 text-cyber-blue mb-4;
+  filter: drop-shadow(0 0 5px var(--cyber-blue));
+}
+
+/* Buttons */
+@layer components {
+  .cyber-button {
+    @apply px-6 py-2 border transition-all duration-300 rounded-md flex items-center justify-center gap-2;
+  }
+
+  .cyber-button.primary {
+    @apply bg-cyber-blue text-black border-cyber-blue hover:bg-transparent hover:text-cyber-blue;
+  }
+
+  .cyber-button.secondary {
+    @apply bg-cyber-purple text-white border-cyber-purple hover:bg-transparent hover:text-cyber-purple;
+  }
+
+  .cyber-button.outline {
+    @apply border-cyber-blue text-cyber-blue hover:bg-cyber-blue hover:text-black;
+  }
+
+  .feature-card {
+    @apply p-6 border border-cyber-blue rounded-lg bg-black/30 backdrop-blur-sm 
+    transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+
+  .nav-link {
+    @apply text-cyber-blue hover:text-white transition-colors duration-300;
+  }
+
+  .cyber-text {
+    @apply text-cyber-blue font-bold;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyber-blue to-cyber-purple bg-clip-text text-transparent;
+  }
+}
+
+.cyber-button::before {
+  content: '';
+  @apply absolute inset-0 transform scale-x-0 origin-left transition-transform duration-300;
+  background: currentColor;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.cyber-button:hover::before {
+  transform: scaleX(1);
+}
+
+/* Text Effects */
+.gradient-text {
+  background: linear-gradient(45deg, var(--cyber-blue), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hover Effects */
+.hover-card {
+  @apply transform transition-all duration-500;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+}
+
+/* Image Effects */
+.neon-border {
+  @apply relative rounded-lg overflow-hidden;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.neon-border::before {
+  content: '';
+  @apply absolute inset-0;
+  background: linear-gradient(45deg, var(--cyber-blue), transparent 70%);
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+.neon-border img {
+  @apply transition-transform duration-700;
+}
+
+.neon-border:hover img {
+  transform: scale(1.05);
+}
+
+/* Scroll Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cyber-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyber-blue);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyber-purple);
+}
+
+section {
+  scroll-margin-top: 5rem;
+}
+
+.nav-link {
+  @apply text-cyber-blue hover:text-white transition-colors duration-300;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Feature cards grid */
+.features-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8;
+}
+
+/* Solutions grid */
+.solutions-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-12;
+}
